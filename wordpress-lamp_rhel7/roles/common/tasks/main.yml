@@ -9,7 +9,8 @@
   service: name=firewalld state=started enabled=yes
 
 - name: Set SELinux to permissive mode
-  command: setenforce 0
+  shell: setenforce 0
+  ignore_errors: True
 
 - name: Disable SELinux
   copy: src=config dest=/etc/selinux/config
