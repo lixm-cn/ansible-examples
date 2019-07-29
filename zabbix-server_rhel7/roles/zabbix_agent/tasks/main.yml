@@ -1,0 +1,14 @@
+---
+
+- name: Install zabbix-agent package
+  yum: name=zabbix-agent state=present
+
+- name: Deploy zabbix-agent config file
+  template: src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agent.conf
+  notify: restart zabbix-agent
+
+- name: Start zabbix-agent service
+  service: name=zabbix-agent state=started enabled=yes
+
+- name: insert firewalld rule for zabbix-agent
+  firewalld: port=10050/tcp permanent=true state=enabled immediate=yes

@@ -1,0 +1,19 @@
+---
+- name: Install Zabbix yum repository
+  yum: name=https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm state=present
+
+- name: Install Firewalld
+  yum: name=firewalld state=present
+
+- name: Firewalld service state
+  service: name=firewalld state=started enabled=yes
+
+- name: Set SELinux to permissive mode
+  shell: setenforce 0
+  ignore_errors: True
+
+- name: Disable SELinux
+  copy: src=config dest=/etc/selinux/config
+
+- name: Set hostname
+  command: hostnamectl set-hostname {{ hostname }}

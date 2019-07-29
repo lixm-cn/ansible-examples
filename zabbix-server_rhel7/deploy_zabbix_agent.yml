@@ -1,0 +1,7 @@
+- name: Zabbix-Agent
+  hosts: zabbix-agents
+  remote_user: root
+
+  roles:
+    - common
+    - zabbix_agent

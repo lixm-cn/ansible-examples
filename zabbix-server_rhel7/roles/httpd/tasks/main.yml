@@ -1,0 +1,22 @@
+---
+# These tasks install http server.
+
+- name: Install httpd and php related package
+  yum: name={{ item }} state=present
+  with_items:
+    - httpd
+    - dejavu-sans-fonts
+    - php
+    - php-bcmath
+    - php-gd
+    - php-ldap
+    - php-mbstring
+    - php-xml
+    - php-mysql
+
+- name: insert firewalld rule for httpd
+  firewalld: port={{ httpd_port }}/tcp permanent=true state=enabled immediate=yes
+
+- name: set httpd service started and startup runner
+  service: name=httpd state=started enabled=yes
+

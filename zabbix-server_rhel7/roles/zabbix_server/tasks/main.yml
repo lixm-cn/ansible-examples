@@ -1,0 +1,33 @@
+---
+- name: Install zabbix-server
+  yum: name={{ item }} state=present
+  with_items:
+    - zabbix-server-mysql
+    - zabbix-web-mysql
+
+- name: Create Zabbix-Server database
+  mysql_db: name={{ zabbix_db_name }} state=present
+
+- name: Create Zabbix-Server database user
+  mysql_user: name={{ zabbix_db_user }} password={{ zabbix_db_password }} priv={{ zabbix_db_name }}.*:ALL host='localhost' state=present
+
+- name: Import initial schema and data.
+  shell: /usr/bin/zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -u{{ zabbix_db_user }} -p{{ zabbix_db_password }} {{ zabbix_db_name }}
+
+- name: Configure the database for Zabbix Server
+  template: src=zabbix_server.conf.j2 dest=/etc/zabbix/zabbix_server.conf
+  notify: restart zabbix-server
+
+- name: Configure PHP for Zabbix frontend
+  template: src=zabbix.conf.j2 dest=/etc/httpd/conf.d/zabbix.conf
+  notify: restart httpd
+
+- name: Start Zabbix-Server
+  service: name=zabbix-server state=started enabled=yes
+
+- name: insert firewalld rule for zabbix-server
+  firewalld: port={{ item }}/tcp permanent=true state=enabled immediate=yes
+  with_items:
+    - 10050
+    - 10051
+
