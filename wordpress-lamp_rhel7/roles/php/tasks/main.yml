@@ -1,4 +1,11 @@
 ---
+
+- name: Install PHP7 yum source
+  yum: name=https://mirror.webtatic.com/yum/el7/webtatic-release.rpm state=present
+
+- name: Makecache for new yum source
+  command: yum makecache
+
 - name: Install php and deps
   yum: name={{ item }} state=present
   with_items:

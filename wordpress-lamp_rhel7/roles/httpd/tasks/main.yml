@@ -1,7 +1,7 @@
 ---
 # These tasks install http server.
 
-- name: Install httpd and php
+- name: Install httpd package
   yum: name=httpd state=present
 
 - name: insert firewalld rule for httpd

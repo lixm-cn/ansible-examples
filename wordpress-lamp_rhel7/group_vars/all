@@ -1,7 +1,7 @@
 ---
 # Variables listed here are applicable to all host groups
 wp_version: 5.2.2
-wp_sha256sum: 3605bcbe9ea48d714efa59b0eb2d251657e7d5b0
+wp_md5sum: "md5:aea5bb5e4fd51034f67c85e6d8bc6bbf"
 
 # MariaDB settings
 mysqlservice: mysqld

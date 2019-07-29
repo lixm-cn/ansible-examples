@@ -1,11 +1,13 @@
 ---
+# 下载Wordpress安装包并解压到目标目录
 - name: Download WordPress
   get_url: url=http://wordpress.org/wordpress-{{ wp_version }}.tar.gz dest=/tmp/wordpress-{{ wp_version }}.tar.gz
-           sha256sum="{{ wp_sha256sum }}"
+           checksum="{{ wp_md5sum }}"
 
 - name: Extract archive
-  command: chdir=/var/www/ /bin/tar -zxf wordpress-{{ wp_version }}.tar.gz creates=/var/www/wordpress
+  command: chdir=/var/www/ /bin/tar -zxf /tmp/wordpress-{{ wp_version }}.tar.gz creates=/var/www/wordpress
 
+# 获取WorkPress随机密钥
 - name: Fetch random salts for WordPress config
   local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
   register: "wp_salt"
@@ -18,7 +20,7 @@
   mysql_user: name={{ wp_db_user }} password={{ wp_db_password }} priv={{ wp_db_name }}.*:ALL host='localhost' state=present
 
 - name: Copy WordPress config file
-  template: src=wp-config.php dest=/srv/wordpress/
+  template: src=wp-config.php.j2 dest=/var/www/wordpress/wp-config.php
 
 - name: Change ownership of WordPress installation
   file: path=/var/www/wordpress/ owner=apache group=apache mode=755 state=directory recurse=yes
