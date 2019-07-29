@@ -1,0 +1,16 @@
+---
+# Variables listed here are applicable to all host groups
+wp_version: 5.2.2
+wp_sha256sum: 3605bcbe9ea48d714efa59b0eb2d251657e7d5b0
+
+# MariaDB settings
+mysqlservice: mysqld
+mysql_port: 3306
+
+# These are the WordPress database settings
+wp_db_name: wordpressdb
+wp_db_user: wordpress
+wp_db_password: wordpress
+
+# This is used for the httpd server configuration
+httpd_port: 80

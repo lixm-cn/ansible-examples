@@ -1,0 +1,9 @@
+<VirtualHost *:80>
+  ServerName {{ ansible_default_ipv4.address }}
+  DocumentRoot "/var/www/wordpress"
+  CustomLog "logs/wordpress_vhost_log" combined
+</VirtualHost>
+
+<Directory "/var/www/wordpress">
+  Require all granted
+</Directory>

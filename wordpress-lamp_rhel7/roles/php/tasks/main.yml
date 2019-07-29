@@ -1,0 +1,11 @@
+---
+- name: Install php and deps
+  yum: name={{ item }} state=present
+  with_items:
+    - php72w-common
+    - php72w-mysql
+    - php72w-mbstring
+    - php72w-xml
+    - php72w-gd
+    - mod_php72w
+  notify: restart httpd

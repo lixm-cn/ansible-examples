@@ -1,0 +1,17 @@
+---
+# This playbook will install MariaDB and create db user and give permissions.
+
+- name: Install MariaDB package
+  yum: name={{ item }} state=installed
+  with_items:
+   - mariadb-libs
+   - mariadb
+   - mariadb-server
+   - MySQL-python
+
+- name: Start MariaDB Service
+  service: name=mariadb state=started enabled=yes
+
+- name: insert firewalld rule
+  firewalld: port={{ mysql_port }}/tcp permanent=true state=enabled immediate=yes
+  ignore_errors: yes
