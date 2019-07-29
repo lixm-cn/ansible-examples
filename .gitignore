@@ -1,2 +1,3 @@
 wordpress-nginx/hosts
 .DS_Store
+.idea/*
