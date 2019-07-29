@@ -44,6 +44,3 @@ handle the configuration appropriately.
 7. 生成Wordpress配置文件并部署
 8. 重启httpd服务
 9. 使用浏览器前端配置
-
-
-
