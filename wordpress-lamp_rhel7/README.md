@@ -2,7 +2,7 @@
 # Date: 2019-07-29
 # Addr： NO.1 Huajing Road, Chian(Shanghai) Pilot Free Trade Zone
 
-## WordPress+Apache+PHP-FPM+MariaDB Deployment
+## WordPress+Apache+PHP+MariaDB Deployment
 
 - Requires Ansible 1.2 or newer
 - Expects CentOS/RHEL 7.x host/s
