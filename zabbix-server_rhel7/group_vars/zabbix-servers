@@ -1,0 +1,15 @@
+---
+
+# These are the ZabbixServer database settings
+zabbix_db_addr: localhost
+zabbix_db_name: zabbixdb
+zabbix_db_user: zabbix
+zabbix_db_password: zabbix
+
+zabbix_date_timezone: "Asia/Shanghai"
+zabbix_server_address: 192.168.128.51
+
+zabbix_server: localhost
+zabbix_server_port: 10051
+zabbix_server_name: "ZabbixServer"
+

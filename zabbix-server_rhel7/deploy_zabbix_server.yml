@@ -1,6 +1,6 @@
 ---
 - name: Install Apache, PHP, MariaDB, Zabbix-Server, Zabbix-Web-Mysql and Zabbix-Agent
-  hosts: zabbix-server
+  hosts: zabbix-servers
   remote_user: root
 
   roles:
@@ -8,4 +8,4 @@
     - httpd
     - mariadb
     - zabbix_server
-    - zabbix_agent
+

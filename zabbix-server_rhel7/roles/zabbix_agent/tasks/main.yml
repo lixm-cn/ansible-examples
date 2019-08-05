@@ -4,7 +4,7 @@
   yum: name=zabbix-agent state=present
 
 - name: Deploy zabbix-agent config file
-  template: src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agent.conf
+  template: src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agentd.conf
   notify: restart zabbix-agent
 
 - name: Start zabbix-agent service
@@ -12,3 +12,36 @@
 
 - name: insert firewalld rule for zabbix-agent
   firewalld: port=10050/tcp permanent=true state=enabled immediate=yes
+
+- name: Create host groups
+  local_action:
+    module: zabbix_group
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_user }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_groups:
+      - jhrz
+      - shyxb
+
+- name: Add zabbix-agent to zabbix-server
+  local_action:
+    module: zabbix_host
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_user }}"
+    login_password: "{{ zabbix_login_password }}"
+    host_name: "{{ ansible_fqdn }}"
+    visible_name: "{{ ansible_hostname }}"
+    host_groups:
+      - "{{ zabbix_default_group }}"
+    link_templates:
+      - "{{ zabbix_link_template }}"
+    status: enabled
+    state: present
+    interfaces:
+      - type: 1
+        main: 1
+        useip: 1
+        ip: "{{ ansible_default_ipv4.address }}"
+        dns: ""
+        port: 10050

@@ -5,7 +5,7 @@
 
   roles:
     - common
-    - mariadb
     - httpd
     - php
+    - mariadb
     - wordpress

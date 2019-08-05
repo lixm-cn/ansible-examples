@@ -1,7 +1,7 @@
-[zabbix-server]
-192.168.216.21
+[zabbix-servers]
+192.168.128.51 hostname=node51.example.com
 
 [zabbix-agents]
-192.168.216.21 hostname=node21.example.com
-192.168.216.22 hostname=node22.example.com
-#192.168.216.23 hostname=node23.example.com
+192.168.128.51 hostname=node51.example.com
+192.168.128.52 hostname=node52.example.com
+192.168.128.53 hostname=node53.example.com

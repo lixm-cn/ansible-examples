@@ -22,12 +22,12 @@
   template: src=zabbix.conf.j2 dest=/etc/httpd/conf.d/zabbix.conf
   notify: restart httpd
 
+- name: Configure zabbix-server parameters
+  template: src=zabbix.conf.php.j2 dest=/etc/zabbix/web/zabbix.conf.php
+  notify: restart zabbix-server
+
 - name: Start Zabbix-Server
   service: name=zabbix-server state=started enabled=yes
 
 - name: insert firewalld rule for zabbix-server
-  firewalld: port={{ item }}/tcp permanent=true state=enabled immediate=yes
-  with_items:
-    - 10050
-    - 10051
-
+  firewalld: port=10051/tcp permanent=true state=enabled immediate=yes

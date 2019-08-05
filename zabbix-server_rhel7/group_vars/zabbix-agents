@@ -1,0 +1,6 @@
+zabbix_server_address: 192.168.128.51
+zabbix_server_url: "http://192.168.128.51/zabbix"
+zabbix_login_user: Admin
+zabbix_login_password: zabbix
+zabbix_link_template: Template OS Linux
+zabbix_default_group: jhrz

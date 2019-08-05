@@ -1,4 +1,4 @@
-- name: Zabbix-Agent
+- name: Deploy Zabbix-Agent
   hosts: zabbix-agents
   remote_user: root
 
